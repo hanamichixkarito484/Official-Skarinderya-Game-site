@@ -85,21 +85,18 @@ function setupSignupForm() {
     msgEl.textContent = "Creating your account...";
     msgEl.className = "form-msg";
 
-    const { data, error } = await supabaseClient.auth.signUp({ email, password });
+    const { data, error } = await supabaseClient.auth.signUp({
+      email,
+      password,
+      options: {
+        data: { display_name: name }, // picked up by the DB trigger to create the profile row
+      },
+    });
 
     if (error) {
       msgEl.textContent = error.message;
       msgEl.className = "form-msg error";
       return;
-    }
-
-    // Create a matching profile row (role defaults to "user")
-    if (data.user) {
-      await supabaseClient.from("profiles").insert({
-        id: data.user.id,
-        display_name: name,
-        role: "user",
-      });
     }
 
     msgEl.textContent = "Account created! Check your email to confirm, then log in.";
