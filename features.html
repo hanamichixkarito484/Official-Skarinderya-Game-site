@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Simmer & Stir | Features</title>
+<link rel="stylesheet" href="css/style.css" />
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo">🍲 Simmer & Stir</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="features.html">Features</a>
+    <a href="dishes.html">Dishes</a>
+    <a href="customers.html">Customers</a>
+    <a href="cms.html" id="nav-cms-link" style="display:none;">CMS</a>
+  </nav>
+  <div class="nav-auth" id="nav-auth-area">
+    <a href="login.html">Log In</a>
+    <a href="signup.html">Sign Up</a>
+  </div>
+</header>
+
+<div class="page-wrap">
+  <h1>Game Features</h1>
+  <p>Everything that makes Simmer & Stir cozy, deep, and endlessly replayable.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>🥘 100+ Recipes</h3>
+      <p>Unlock dishes from breakfast staples to elaborate five-course dinners.</p>
+    </div>
+    <div class="card">
+      <h3>🛠️ Kitchen Customization</h3>
+      <p>Redesign your kitchen and dining area with dozens of themes and furniture sets.</p>
+    </div>
+    <div class="card">
+      <h3>📈 Restaurant Progression</h3>
+      <p>Grow your reputation, hire staff, and expand from a food cart to a five-star bistro.</p>
+    </div>
+    <div class="card">
+      <h3>🎉 Seasonal Events</h3>
+      <p>Limited-time recipes and decorations tied to real-world holidays and seasons.</p>
+    </div>
+    <div class="card">
+      <h3>🧑‍🍳 Character Stories</h3>
+      <p>Every regular customer has a personality, favorite order, and small story arc.</p>
+    </div>
+    <div class="card">
+      <h3>🌐 Community & CMS-Managed Content</h3>
+      <p>New dishes and events are added regularly by our development team through our content system.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 Simmer & Stir. All rights reserved.</p>
+  <p>Questions or feedback? We'd love to hear from you.</p>
+  <button class="btn" onclick="document.getElementById('message-overlay').classList.add('open')">Send Us a Message</button>
+</footer>
+
+<button class="message-fab" id="message-fab">💬 Message Us</button>
+
+<div class="modal-overlay" id="message-overlay">
+  <div class="modal-box">
+    <button class="close-btn" id="message-close">&times;</button>
+    <h2>Send Us a Message</h2>
+    <form id="message-form">
+      <label for="message-name">Name</label>
+      <input type="text" id="message-name" required />
+      <label for="message-email">Email</label>
+      <input type="email" id="message-email" required />
+      <label for="message-body">Message</label>
+      <textarea id="message-body" rows="4" required></textarea>
+      <button type="submit" class="btn">Send</button>
+      <p class="form-msg" id="message-form-msg"></p>
+    </form>
+  </div>
+</div>
+
+<script src="js/supabase-client.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/messages.js"></script>
+</body>
+</html>

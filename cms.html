@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Simmer & Stir | CMS</title>
+<link rel="stylesheet" href="css/style.css" />
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo">🍲 Simmer & Stir</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="features.html">Features</a>
+    <a href="dishes.html">Dishes</a>
+    <a href="customers.html">Customers</a>
+    <a href="cms.html" id="nav-cms-link" style="display:none;">CMS</a>
+  </nav>
+  <div class="nav-auth" id="nav-auth-area">
+    <a href="login.html">Log In</a>
+    <a href="signup.html">Sign Up</a>
+  </div>
+</header>
+
+<div class="page-wrap">
+  <h1>Developer / Admin CMS</h1>
+  <p id="cms-gate" style="font-weight:bold;">Checking access...</p>
+
+  <div id="cms-content" style="display:none;">
+
+    <div class="cms-section">
+      <h2>Manage Dishes</h2>
+      <form id="add-dish-form">
+        <label for="dish-name">Dish Name</label>
+        <input type="text" id="dish-name" required />
+        <label for="dish-description">Description</label>
+        <input type="text" id="dish-description" />
+        <label for="dish-price">Price (USD)</label>
+        <input type="number" step="0.01" id="dish-price" />
+        <label for="dish-image">Image URL</label>
+        <input type="text" id="dish-image" placeholder="https://..." />
+        <button type="submit" class="btn">Add Dish</button>
+      </form>
+
+      <table class="cms-table">
+        <thead>
+          <tr><th>Name</th><th>Description</th><th>Price</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="dishes-tbody">
+          <tr><td colspan="4">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cms-section">
+      <h2>Message Inbox</h2>
+      <p>Messages sent through the site's "Message Us" button appear here.</p>
+      <table class="cms-table">
+        <thead>
+          <tr><th>Name</th><th>Email</th><th>Message</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="messages-tbody">
+          <tr><td colspan="4">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 Simmer & Stir. All rights reserved.</p>
+  <p>Questions or feedback? We'd love to hear from you.</p>
+  <button class="btn" onclick="document.getElementById('message-overlay').classList.add('open')">Send Us a Message</button>
+</footer>
+
+<button class="message-fab" id="message-fab">💬 Message Us</button>
+
+<div class="modal-overlay" id="message-overlay">
+  <div class="modal-box">
+    <button class="close-btn" id="message-close">&times;</button>
+    <h2>Send Us a Message</h2>
+    <form id="message-form">
+      <label for="message-name">Name</label>
+      <input type="text" id="message-name" required />
+      <label for="message-email">Email</label>
+      <input type="email" id="message-email" required />
+      <label for="message-body">Message</label>
+      <textarea id="message-body" rows="4" required></textarea>
+      <button type="submit" class="btn">Send</button>
+      <p class="form-msg" id="message-form-msg"></p>
+    </form>
+  </div>
+</div>
+
+<script src="js/supabase-client.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/messages.js"></script>
+<script src="js/cms.js"></script>
+</body>
+</html>
