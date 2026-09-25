@@ -1,4 +1,4 @@
-# Simmer & Stir — Cooking Game Website
+# Skarinderya — Cooking Game Website
 
 A static website (Home, About, Features, Dishes, Customers) with login/sign-up,
 an admin CMS for managing dishes and viewing messages, and a floating
