@@ -24,13 +24,19 @@
 body {
   margin: 0;
   font-family: "Times New Roman", Times, serif;
-  background-color: #0b1030; /* fallback while the image loads */
-  background-image: url("../images/background.jpg");
+  background-color: var(--bg-warm);
+  background-image: url("images/background.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  background-repeat: no-repeat;
   color: var(--text-dark);
   line-height: 1.6;
+}
+
+/* Keep card/content areas easy to read over the background image */
+.page-wrap {
+  background-color: rgba(251, 241, 225, 0.88);
 }
 
 h1, h2, h3, h4 {
@@ -112,13 +118,7 @@ img {
 /* ---------- Layout ---------- */
 .page-wrap {
   min-height: 80vh;
-  max-width: 1100px;
-  margin: 32px auto;
-  padding: 40px 6% 60px;
-  /* cream panel so text stays readable on the dark background image */
-  background-color: rgba(251, 241, 225, 0.95);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  padding: 40px 8vw 80px;
 }
 
 .hero {
