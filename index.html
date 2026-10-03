@@ -22,33 +22,43 @@
 </header>
 
 <section class="hero">
-  <h1>Cook, Create, and Serve Up Fun!</h1>
-  <p>Welcome to Skarinderya, the cozy cooking game where you build your dream restaurant, invent new dishes, and delight a growing crowd of hungry customers.</p>
+  <h1 data-content-key="home_hero_title">Cook, Create, and Serve Up Fun!</h1>
+  <p data-content-key="home_hero_subtitle">Welcome to Skarinderya, the cozy cooking game where you build your dream restaurant, invent new dishes, and delight a growing crowd of hungry customers.</p>
   <a href="https://drive.google.com/file/d/1R3mGyJIKJbGnr5sgBu67uGhLMvkraihe/view?usp=sharing" class="btn" target="_blank" rel="noopener noreferrer">Install the Game</a>
 </section>
 
-<div class="page-wrap">
-  <h2 style="text-align: center;">See Skarinderya in Action</h2>
-  <video class="trailer-video" controls preload="metadata" playsinline poster="images/gameplay-poster.jpg">
-    <source src="videos/gameplay.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
+<div class="page-wrap" style="padding-bottom:0;">
+  <h2 style="text-align:center;">Watch the Trailer</h2>
+  <video class="trailer-video" controls preload="metadata" poster="images/trailer-poster.jpg">
+    <source src="videos/trailer.mp4" type="video/mp4" />
+    Your browser doesn't support embedded video. You can download the trailer directly instead.
   </video>
+</div>
 
-  <h2 style="text-align: center; margin-top: 40px;">What is Skarinderya?</h2>
-  <p>Skarinderya is a warm, relaxing cooking simulation game. Chop, sizzle, plate, and serve as you grow from a humble food cart to a beloved neighborhood restaurant. Along the way, unlock new recipes, decorate your kitchen, and win over a cast of quirky, hungry customers.</p>
+<div class="page-wrap" style="padding-bottom:0;">
+  <h2 style="text-align:center;">Gameplay</h2>
+  <video class="trailer-video" controls preload="metadata" poster="images/gameplay-poster.jpg">
+    <source src="videos/gameplay.mp4" type="video/mp4" />
+    Your browser doesn't support embedded video. You can download the gameplay clip directly instead.
+  </video>
+</div>
+
+<div class="page-wrap">
+  <h2 data-content-key="home_intro_heading">What is Skarinderya?</h2>
+  <p data-content-key="home_intro_text">Skarinderya is a warm, relaxing cooking simulation game. Chop, sizzle, plate, and serve as you grow from a humble food cart to a beloved neighborhood restaurant. Along the way, unlock new recipes, decorate your kitchen, and win over a cast of quirky, hungry customers.</p>
 
   <div class="card-grid">
     <div class="card">
-      <h3>🍳 Cook Real Recipes</h3>
-      <p>Dozens of dishes inspired by cuisines from around the world.</p>
+      <h3 data-content-key="home_feature1_title">🍳 Cook Real Recipes</h3>
+      <p data-content-key="home_feature1_text">Dozens of dishes inspired by cuisines from around the world.</p>
     </div>
     <div class="card">
-      <h3>🏪 Build Your Restaurant</h3>
-      <p>Upgrade your kitchen and dining room as your reputation grows.</p>
+      <h3 data-content-key="home_feature2_title">🏪 Build Your Restaurant</h3>
+      <p data-content-key="home_feature2_text">Upgrade your kitchen and dining room as your reputation grows.</p>
     </div>
     <div class="card">
-      <h3>🧑‍🤝‍🧑 Meet Your Customers</h3>
-      <p>Every customer has a story, a favorite dish, and a personality.</p>
+      <h3 data-content-key="home_feature3_title">🧑‍🤝‍🧑 Meet Your Customers</h3>
+      <p data-content-key="home_feature3_text">Every customer has a story, a favorite dish, and a personality.</p>
     </div>
   </div>
 </div>
@@ -81,6 +91,7 @@
 </div>
 
 <script src="js/supabase-client.js"></script>
+<script src="js/content.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/messages.js"></script>
 </body>
