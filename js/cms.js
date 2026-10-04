@@ -138,6 +138,8 @@ const CONTENT_MANIFEST = {
     { key: "about_team2_text", label: "Team card 2 text", default: "We listen closely to player feedback through our message box and community events." },
     { key: "about_team3_title", label: "Team card 3 title", default: "Culinary Advisors" },
     { key: "about_team3_text", label: "Team card 3 text", default: "Real home cooks and chefs help make sure every dish feels authentic." },
+    { key: "about_team4_title", label: "Team card 4 title", default: "Mickey Saballegue" },
+    { key: "about_team4_text", label: "Team card 4 text", default: "One of the Main Programmers for Skarinderya." },
   ],
   "Features": [
     { key: "features_title", label: "Page title", default: "Game Features" },
