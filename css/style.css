@@ -35,15 +35,6 @@ body {
   line-height: 1.6;
 }
 
-/* Keep card/content areas easy to read over the background image */
-.page-wrap {
-  background-color: rgba(251, 241, 225, 0.55);
-}
-
-.hero {
-  background: linear-gradient(180deg, rgba(245, 228, 204, 0.6), rgba(251, 241, 225, 0.45)) !important;
-}
-
 h1, h2, h3, h4 {
   font-family: "Times New Roman", Times, serif;
   color: var(--accent-brown);
@@ -124,12 +115,13 @@ img {
 .page-wrap {
   min-height: 80vh;
   padding: 40px 8vw 80px;
+  background-color: rgba(251, 241, 225, 0.3);
 }
 
 .hero {
   text-align: center;
   padding: 60px 6vw;
-  background: linear-gradient(180deg, var(--bg-warm-soft), var(--bg-warm));
+  background: linear-gradient(180deg, rgba(245, 228, 204, 0.3), rgba(251, 241, 225, 0.2));
 }
 
 .hero h1 {
