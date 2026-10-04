@@ -25,7 +25,7 @@ body {
   margin: 0;
   font-family: "Times New Roman", Times, serif;
   background-color: var(--bg-warm);
-  background-image: url("images/background.jpg");
+  background-image: url("../images/background.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -36,7 +36,11 @@ body {
 
 /* Keep card/content areas easy to read over the background image */
 .page-wrap {
-  background-color: rgba(251, 241, 225, 0.88);
+  background-color: rgba(251, 241, 225, 0.55);
+}
+
+.hero {
+  background: linear-gradient(180deg, rgba(245, 228, 204, 0.6), rgba(251, 241, 225, 0.45)) !important;
 }
 
 h1, h2, h3, h4 {
