@@ -57,13 +57,13 @@ img {
 
 /* ---------- Navigation ---------- */
 .navbar {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: var(--accent-brown);
   color: var(--white);
   padding: 14px 28px;
-  flex-wrap: wrap;
 }
 
 .navbar .logo {
@@ -73,19 +73,51 @@ img {
   letter-spacing: 1px;
 }
 
+.nav-toggle {
+  background: none;
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.nav-toggle:hover {
+  background-color: var(--accent-gold);
+  color: var(--accent-brown);
+}
+
 .navbar nav {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  right: 28px;
+  min-width: 200px;
+  background-color: var(--accent-brown);
+  border: 1px solid var(--accent-gold);
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 998;
+  box-shadow: var(--shadow);
+}
+
+.navbar nav.open {
   display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
 }
 
 .navbar nav a {
   color: var(--white);
   font-size: 1.05rem;
+  padding: 12px 20px;
 }
 
 .navbar nav a:hover {
-  color: var(--accent-gold);
+  background-color: var(--accent-gold);
+  color: var(--accent-brown);
   text-decoration: none;
 }
 
