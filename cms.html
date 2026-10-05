@@ -30,8 +30,13 @@
 
     <button class="btn btn-secondary" id="cms-logout">Log Out</button>
 
+    <div class="cms-tabs">
+      <button type="button" class="cms-tab-btn active" data-tab="dishes">Manage Dishes</button>
+      <button type="button" class="cms-tab-btn" data-tab="content">Page Content</button>
+      <button type="button" class="cms-tab-btn" data-tab="messages">Message Inbox</button>
+    </div>
 
-    <div class="cms-section">
+    <div class="cms-section cms-tab-panel" id="tab-dishes">
       <h2>Manage Dishes</h2>
       <form id="add-dish-form">
         <label for="dish-name">Dish Name</label>
@@ -53,15 +58,16 @@
       </table>
     </div>
 
-    <div class="cms-section">
+    <div class="cms-section cms-tab-panel" id="tab-content" style="display:none;">
       <h2>Manage Page Content</h2>
       <p>Edit the text shown on Home, About, Features, Dishes, and Customers. Leave a field blank to fall back to its default wording. Changes appear on the live site as soon as you save.</p>
+      <div class="content-page-tabs" id="content-page-tabs"></div>
       <div id="content-editor-fields">Loading...</div>
       <button class="btn" id="save-content-btn" style="margin-top:18px;">Save All Content</button>
       <p class="form-msg" id="content-save-msg"></p>
     </div>
 
-    <div class="cms-section">
+    <div class="cms-section cms-tab-panel" id="tab-messages" style="display:none;">
       <h2>Message Inbox</h2>
       <p>Messages sent through the site's "Message Us" button appear here.</p>
       <table class="cms-table">
