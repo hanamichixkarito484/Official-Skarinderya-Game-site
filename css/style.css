@@ -380,6 +380,54 @@ footer .btn {
   padding-top: 18px;
 }
 
+/* ---------- CMS top-level tabs (Dishes / Page Content / Messages) ---------- */
+.cms-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.cms-tab-btn {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 10px 18px;
+  border-radius: 20px;
+  border: 2px solid var(--accent-brown);
+  background-color: var(--white);
+  color: var(--accent-brown);
+  cursor: pointer;
+}
+
+.cms-tab-btn.active {
+  background-color: var(--accent-brown);
+  color: var(--white);
+}
+
+/* ---------- Page Content sub-tabs (Home / About / Features / ...) ---------- */
+.content-page-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 6px;
+}
+
+.content-page-tab-btn {
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 7px 14px;
+  border-radius: 16px;
+  border: 1px solid var(--accent-terracotta);
+  background-color: var(--white);
+  color: var(--accent-terracotta-dark);
+  cursor: pointer;
+}
+
+.content-page-tab-btn.active {
+  background-color: var(--accent-terracotta);
+  color: var(--white);
+}
+
 table.cms-table {
   width: 100%;
   border-collapse: collapse;
