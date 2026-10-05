@@ -43,9 +43,15 @@
         <input type="text" id="dish-name" required />
         <label for="dish-description">Description</label>
         <input type="text" id="dish-description" />
-        <label for="dish-image">Image URL</label>
+        <label for="dish-image-file">Upload a Photo</label>
+        <input type="file" id="dish-image-file" accept="image/*" />
+        <label for="dish-image">Or Paste an Image Link Instead</label>
         <input type="text" id="dish-image" placeholder="https://..." />
-        <button type="submit" class="btn">Add Dish</button>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:18px;">
+          <button type="submit" class="btn" id="dish-form-submit-btn">Add Dish</button>
+          <button type="button" class="btn btn-secondary" id="dish-form-cancel-btn" style="display:none;">Cancel Edit</button>
+        </div>
+        <p class="form-msg" id="dish-form-msg"></p>
       </form>
 
       <table class="cms-table">
@@ -53,7 +59,7 @@
           <tr><th>Name</th><th>Description</th><th>Actions</th></tr>
         </thead>
         <tbody id="dishes-tbody">
-          <tr><td colspan="4">Loading...</td></tr>
+          <tr><td colspan="3">Loading...</td></tr>
         </tbody>
       </table>
     </div>
