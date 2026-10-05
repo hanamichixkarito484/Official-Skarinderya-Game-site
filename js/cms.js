@@ -30,6 +30,9 @@ async function guardCmsAccess() {
 }
 
 // ---------- Dishes CRUD ----------
+let currentDishes = [];
+let editingDishId = null;
+
 async function loadDishesTable() {
   const tbody = document.getElementById("dishes-tbody");
   const { data: dishes, error } = await supabaseClient
@@ -38,17 +41,20 @@ async function loadDishesTable() {
     .order("created_at", { ascending: false });
 
   if (error) {
-    tbody.innerHTML = `<tr><td colspan="4">Error loading dishes: ${error.message}</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="3">Error loading dishes: ${error.message}</td></tr>`;
     return;
   }
 
-  tbody.innerHTML = dishes
+  currentDishes = dishes || [];
+
+  tbody.innerHTML = currentDishes
     .map(
       (d) => `
     <tr>
-      <td>${d.name}</td>
-      <td>${d.description || ""}</td>
+      <td>${escapeHtml(d.name)}</td>
+      <td>${escapeHtml(d.description || "")}</td>
       <td class="inline-actions">
+        <button onclick="startEditDish('${d.id}')">Edit</button>
         <button onclick="deleteDish('${d.id}')" class="danger">Delete</button>
       </td>
     </tr>`
@@ -59,19 +65,79 @@ async function loadDishesTable() {
 async function deleteDish(id) {
   if (!confirm("Delete this dish?")) return;
   await supabaseClient.from("dishes").delete().eq("id", id);
+  if (editingDishId === id) resetDishForm();
   loadDishesTable();
+}
+
+function startEditDish(id) {
+  const dish = currentDishes.find((d) => d.id === id);
+  if (!dish) return;
+  editingDishId = id;
+  document.getElementById("dish-name").value = dish.name || "";
+  document.getElementById("dish-description").value = dish.description || "";
+  document.getElementById("dish-image").value = dish.image_url || "";
+  document.getElementById("dish-image-file").value = "";
+  document.getElementById("dish-form-submit-btn").textContent = "Update Dish";
+  document.getElementById("dish-form-cancel-btn").style.display = "inline-block";
+  document.getElementById("dish-form-msg").textContent = "";
+  document.getElementById("add-dish-form").scrollIntoView({ behavior: "smooth" });
+}
+
+function resetDishForm() {
+  editingDishId = null;
+  document.getElementById("add-dish-form").reset();
+  document.getElementById("dish-form-submit-btn").textContent = "Add Dish";
+  document.getElementById("dish-form-cancel-btn").style.display = "none";
 }
 
 function setupAddDishForm() {
   const form = document.getElementById("add-dish-form");
+  const msgEl = document.getElementById("dish-form-msg");
+
+  document.getElementById("dish-form-cancel-btn").addEventListener("click", resetDishForm);
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const name = document.getElementById("dish-name").value.trim();
     const description = document.getElementById("dish-description").value.trim();
-    const image_url = document.getElementById("dish-image").value.trim();
+    const fileInput = document.getElementById("dish-image-file");
+    let image_url = document.getElementById("dish-image").value.trim();
 
-    await supabaseClient.from("dishes").insert({ name, description, image_url });
-    form.reset();
+    msgEl.textContent = "Saving...";
+    msgEl.className = "form-msg";
+
+    // A chosen file always takes priority over a pasted URL
+    if (fileInput.files && fileInput.files[0]) {
+      const file = fileInput.files[0];
+      const path = `${Date.now()}-${file.name.replace(/\s+/g, "-")}`;
+      const { error: uploadError } = await supabaseClient.storage.from("dish-images").upload(path, file);
+      if (uploadError) {
+        msgEl.textContent = "Image upload failed: " + uploadError.message;
+        msgEl.className = "form-msg error";
+        return;
+      }
+      const { data: urlData } = supabaseClient.storage.from("dish-images").getPublicUrl(path);
+      image_url = urlData.publicUrl;
+    }
+
+    let error;
+    if (editingDishId) {
+      const payload = { name, description };
+      if (image_url) payload.image_url = image_url; // leave existing image if nothing new was given
+      ({ error } = await supabaseClient.from("dishes").update(payload).eq("id", editingDishId));
+    } else {
+      ({ error } = await supabaseClient.from("dishes").insert({ name, description, image_url }));
+    }
+
+    if (error) {
+      msgEl.textContent = "Error: " + error.message;
+      msgEl.className = "form-msg error";
+      return;
+    }
+
+    msgEl.textContent = editingDishId ? "Dish updated!" : "Dish added!";
+    msgEl.className = "form-msg success";
+    resetDishForm();
     loadDishesTable();
   });
 }
