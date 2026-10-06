@@ -286,6 +286,62 @@ async function loadContentEditor() {
   });
 }
 
+// ---------- Gameplay Video (link or direct upload) ----------
+async function setupVideoForm() {
+  const currentEl = document.getElementById("video-current");
+  const linkInput = document.getElementById("video-youtube-link");
+  const fileInput = document.getElementById("video-upload-file");
+  const saveBtn = document.getElementById("save-video-btn");
+  const msgEl = document.getElementById("video-save-msg");
+
+  const { data } = await supabaseClient
+    .from("content_blocks")
+    .select("value")
+    .eq("key", "home_gameplay_video")
+    .maybeSingle();
+  currentEl.value = (data && data.value) || "(using the built-in default video)";
+
+  saveBtn.addEventListener("click", async () => {
+    msgEl.textContent = "Saving...";
+    msgEl.className = "form-msg";
+
+    let value = linkInput.value.trim();
+
+    if (fileInput.files && fileInput.files[0]) {
+      const file = fileInput.files[0];
+      const path = `${Date.now()}-${file.name.replace(/\s+/g, "-")}`;
+      const { error: uploadError } = await supabaseClient.storage.from("site-media").upload(path, file);
+      if (uploadError) {
+        msgEl.textContent = "Upload failed: " + uploadError.message;
+        msgEl.className = "form-msg error";
+        return;
+      }
+      const { data: urlData } = supabaseClient.storage.from("site-media").getPublicUrl(path);
+      value = urlData.publicUrl;
+    }
+
+    if (!value) {
+      msgEl.textContent = "Paste a YouTube link or choose a file first.";
+      msgEl.className = "form-msg error";
+      return;
+    }
+
+    const { error } = await supabaseClient.from("content_blocks").upsert({ key: "home_gameplay_video", value });
+
+    if (error) {
+      msgEl.textContent = "Error: " + error.message;
+      msgEl.className = "form-msg error";
+      return;
+    }
+
+    msgEl.textContent = "Saved! Check the Home page to see it.";
+    msgEl.className = "form-msg success";
+    currentEl.value = value;
+    linkInput.value = "";
+    fileInput.value = "";
+  });
+}
+
 // ---------- Top-level CMS tabs (Manage Dishes / Page Content / Message Inbox) ----------
 function setupCmsTabs() {
   const buttons = document.querySelectorAll(".cms-tab-btn");
@@ -340,4 +396,5 @@ document.addEventListener("DOMContentLoaded", async () => {
   loadMessagesTable();
   loadContentEditor();
   setupContentSaveButton();
+  setupVideoForm();
 });
