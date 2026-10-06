@@ -33,6 +33,7 @@
     <div class="cms-tabs">
       <button type="button" class="cms-tab-btn active" data-tab="dishes">Manage Dishes</button>
       <button type="button" class="cms-tab-btn" data-tab="content">Page Content</button>
+      <button type="button" class="cms-tab-btn" data-tab="video">Gameplay Video</button>
       <button type="button" class="cms-tab-btn" data-tab="messages">Message Inbox</button>
     </div>
 
@@ -71,6 +72,23 @@
       <div id="content-editor-fields">Loading...</div>
       <button class="btn" id="save-content-btn" style="margin-top:18px;">Save All Content</button>
       <p class="form-msg" id="content-save-msg"></p>
+    </div>
+
+    <div class="cms-section cms-tab-panel" id="tab-video" style="display:none;">
+      <h2>Gameplay Video</h2>
+      <p>Paste a YouTube link, or upload a video file directly. Whichever you save replaces what's currently showing on the Home page.</p>
+
+      <label for="video-current">Currently Set To</label>
+      <input type="text" id="video-current" readonly />
+
+      <label for="video-youtube-link">Paste a YouTube Link</label>
+      <input type="text" id="video-youtube-link" placeholder="https://youtu.be/..." />
+
+      <label for="video-upload-file">Or Upload a Video File</label>
+      <input type="file" id="video-upload-file" accept="video/*" />
+
+      <button class="btn" id="save-video-btn" style="margin-top:18px;">Save Gameplay Video</button>
+      <p class="form-msg" id="video-save-msg"></p>
     </div>
 
     <div class="cms-section cms-tab-panel" id="tab-messages" style="display:none;">
