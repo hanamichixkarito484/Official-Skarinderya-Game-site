@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Skarinderya | CMS</title>
+<title>Skarinderya | Home</title>
 <link rel="stylesheet" href="css/style.css" />
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -22,99 +22,49 @@
   </nav>
 </header>
 
+<section class="hero">
+  <h1 data-content-key="home_hero_title">Cook, Create, and Serve Up Fun!</h1>
+  <p data-content-key="home_hero_subtitle">Welcome to Skarinderya, the cozy cooking game where you build your dream restaurant, invent new dishes, and delight a growing crowd of hungry customers.</p>
+  <a href="https://drive.google.com/file/d/1R3mGyJIKJbGnr5sgBu67uGhLMvkraihe/view?usp=sharing" class="btn" target="_blank" rel="noopener noreferrer">Install the Game</a>
+</section>
+
+<div class="page-wrap" style="padding-bottom:0;">
+  <h2 style="text-align:center;">Gameplay</h2>
+  <div class="video-embed">
+    <iframe data-content-video-key="home_gameplay_video" src="https://www.youtube.com/embed/E7ZisKSG7ow" title="Skarinderya Gameplay" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  </div>
+</div>
+
 <div class="page-wrap">
-  <h1>Developer / Admin CMS</h1>
-  <p id="cms-gate" style="font-weight:bold;">Checking access...</p>
+  <h2 data-content-key="home_intro_heading">What is Skarinderya?</h2>
+  <p data-content-key="home_intro_text">Skarinderya is a warm, relaxing cooking simulation game. Chop, sizzle, plate, and serve as you grow from a humble food cart to a beloved neighborhood restaurant. Along the way, unlock new recipes, decorate your kitchen, and win over a cast of quirky, hungry customers.</p>
 
-  <div id="cms-content" style="display:none;">
-
-    <button class="btn btn-secondary" id="cms-logout">Log Out</button>
-
-    <div class="cms-tabs">
-      <button type="button" class="cms-tab-btn active" data-tab="dishes">Manage Dishes</button>
-      <button type="button" class="cms-tab-btn" data-tab="content">Page Content</button>
-      <button type="button" class="cms-tab-btn" data-tab="video">Gameplay Video</button>
-      <button type="button" class="cms-tab-btn" data-tab="messages">Message Inbox</button>
+  <div class="card-grid">
+    <div class="card">
+      <h3 data-content-key="home_feature1_title">🍳 Cook Real Recipes</h3>
+      <p data-content-key="home_feature1_text">Dozens of dishes inspired by cuisines from around the world.</p>
     </div>
-
-    <div class="cms-section cms-tab-panel" id="tab-dishes">
-      <h2>Manage Dishes</h2>
-      <form id="add-dish-form">
-        <label for="dish-name">Dish Name</label>
-        <input type="text" id="dish-name" required />
-        <label for="dish-description">Description</label>
-        <input type="text" id="dish-description" />
-        <label for="dish-image-file">Upload a Photo</label>
-        <input type="file" id="dish-image-file" accept="image/*" />
-        <label for="dish-image">Or Paste an Image Link Instead</label>
-        <input type="text" id="dish-image" placeholder="https://..." />
-        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:18px;">
-          <button type="submit" class="btn" id="dish-form-submit-btn">Add Dish</button>
-          <button type="button" class="btn btn-secondary" id="dish-form-cancel-btn" style="display:none;">Cancel Edit</button>
-        </div>
-        <p class="form-msg" id="dish-form-msg"></p>
-      </form>
-
-      <table class="cms-table">
-        <thead>
-          <tr><th>Name</th><th>Description</th><th>Actions</th></tr>
-        </thead>
-        <tbody id="dishes-tbody">
-          <tr><td colspan="3">Loading...</td></tr>
-        </tbody>
-      </table>
+    <div class="card">
+      <h3 data-content-key="home_feature2_title">🏪 Build Your Restaurant</h3>
+      <p data-content-key="home_feature2_text">Upgrade your kitchen and dining room as your reputation grows.</p>
     </div>
-
-    <div class="cms-section cms-tab-panel" id="tab-content" style="display:none;">
-      <h2>Manage Page Content</h2>
-      <p>Edit the text shown on Home, About, Features, Dishes, and Customers. Leave a field blank to fall back to its default wording. Changes appear on the live site as soon as you save.</p>
-      <div class="content-page-tabs" id="content-page-tabs"></div>
-      <div id="content-editor-fields">Loading...</div>
-      <button class="btn" id="save-content-btn" style="margin-top:18px;">Save All Content</button>
-      <p class="form-msg" id="content-save-msg"></p>
+    <div class="card">
+      <h3 data-content-key="home_feature3_title">🧑‍🤝‍🧑 Meet Your Customers</h3>
+      <p data-content-key="home_feature3_text">Every customer has a story, a favorite dish, and a personality.</p>
     </div>
-
-    <div class="cms-section cms-tab-panel" id="tab-video" style="display:none;">
-      <h2>Gameplay Video</h2>
-      <p>Paste a YouTube link, or upload a video file directly. Whichever you save replaces what's currently showing on the Home page.</p>
-
-      <label for="video-current">Currently Set To</label>
-      <input type="text" id="video-current" readonly />
-
-      <label for="video-youtube-link">Paste a YouTube Link</label>
-      <input type="text" id="video-youtube-link" placeholder="https://youtu.be/..." />
-
-      <label for="video-upload-file">Or Upload a Video File</label>
-      <input type="file" id="video-upload-file" accept="video/*" />
-
-      <button class="btn" id="save-video-btn" style="margin-top:18px;">Save Gameplay Video</button>
-      <p class="form-msg" id="video-save-msg"></p>
-    </div>
-
-    <div class="cms-section cms-tab-panel" id="tab-messages" style="display:none;">
-      <h2>Message Inbox</h2>
-      <p>Messages sent through the site's "Message Us" button appear here.</p>
-      <table class="cms-table">
-        <thead>
-          <tr><th>Name</th><th>Email</th><th>Message</th><th>Actions</th></tr>
-        </thead>
-        <tbody id="messages-tbody">
-          <tr><td colspan="4">Loading...</td></tr>
-        </tbody>
-      </table>
-    </div>
-
   </div>
 </div>
 
 <footer>
   <p>&copy; 2026 Skarinderya. All rights reserved.</p>
   <p>Questions or feedback? We'd love to hear from you.</p>
-  <button class="btn" onclick="document.getElementById('message-overlay').classList.add('open')">Send Us a Message</button>
+  <button class="btn" id="message-fab-inline" onclick="document.getElementById('message-overlay').classList.add('open')">Send Us a Message</button>
 </footer>
 
+<!-- Floating message button -->
 <button class="message-fab" id="message-fab">💬 Message Us</button>
 
+<!-- Message modal -->
 <div class="modal-overlay" id="message-overlay">
   <div class="modal-box">
     <button class="close-btn" id="message-close">&times;</button>
@@ -134,8 +84,8 @@
 
 <script src="js/supabase-client.js"></script>
 <script src="js/nav.js"></script>
+<script src="js/content.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/messages.js"></script>
-<script src="js/cms.js"></script>
 </body>
 </html>
