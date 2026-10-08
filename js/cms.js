@@ -286,6 +286,76 @@ async function loadContentEditor() {
   });
 }
 
+// ---------- Customer Images (upload or link) ----------
+async function setupCustomerImages() {
+  const rows = document.querySelectorAll(".customer-image-row");
+  if (!rows.length) return;
+
+  // Show each customer's current image (saved one if it exists, else the built-in default)
+  const { data } = await supabaseClient.from("content_blocks").select("key, value");
+  const saved = {};
+  (data || []).forEach((r) => (saved[r.key] = r.value));
+  const defaults = {
+    customers_kapre_image: "images/kapre.png",
+    customers_manananggal_image: "images/manananggal.png",
+    customers_duwende_image: "images/duwende.png",
+  };
+
+  rows.forEach((row) => {
+    const key = row.getAttribute("data-key");
+    row.querySelector(".customer-image-preview").src = saved[key] || defaults[key];
+  });
+
+  document.querySelectorAll(".cust-save-btn").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const who = btn.getAttribute("data-who");
+      const key = `customers_${who}_image`;
+      const fileInput = document.getElementById(`cust-${who}-file`);
+      const urlInput = document.getElementById(`cust-${who}-url`);
+      const msgEl = document.getElementById(`cust-${who}-msg`);
+      const preview = btn.closest(".customer-image-row").querySelector(".customer-image-preview");
+
+      msgEl.textContent = "Saving...";
+      msgEl.className = "form-msg";
+
+      let value = urlInput.value.trim();
+
+      // A chosen file always takes priority over a pasted link
+      if (fileInput.files && fileInput.files[0]) {
+        const file = fileInput.files[0];
+        const path = `customers/${Date.now()}-${file.name.replace(/\s+/g, "-")}`;
+        const { error: uploadError } = await supabaseClient.storage.from("site-media").upload(path, file);
+        if (uploadError) {
+          msgEl.textContent = "Upload failed: " + uploadError.message;
+          msgEl.className = "form-msg error";
+          return;
+        }
+        const { data: urlData } = supabaseClient.storage.from("site-media").getPublicUrl(path);
+        value = urlData.publicUrl;
+      }
+
+      if (!value) {
+        msgEl.textContent = "Choose a file or paste an image link first.";
+        msgEl.className = "form-msg error";
+        return;
+      }
+
+      const { error } = await supabaseClient.from("content_blocks").upsert({ key, value });
+      if (error) {
+        msgEl.textContent = "Error: " + error.message;
+        msgEl.className = "form-msg error";
+        return;
+      }
+
+      msgEl.textContent = "Saved! Check the Customers page.";
+      msgEl.className = "form-msg success";
+      preview.src = value;
+      fileInput.value = "";
+      urlInput.value = "";
+    });
+  });
+}
+
 // ---------- Gameplay Video (link or direct upload) ----------
 async function setupVideoForm() {
   const currentEl = document.getElementById("video-current");
@@ -397,4 +467,5 @@ document.addEventListener("DOMContentLoaded", async () => {
   loadContentEditor();
   setupContentSaveButton();
   setupVideoForm();
+  setupCustomerImages();
 });
