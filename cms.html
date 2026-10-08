@@ -33,6 +33,7 @@
     <div class="cms-tabs">
       <button type="button" class="cms-tab-btn active" data-tab="dishes">Manage Dishes</button>
       <button type="button" class="cms-tab-btn" data-tab="content">Page Content</button>
+      <button type="button" class="cms-tab-btn" data-tab="customers">Customer Images</button>
       <button type="button" class="cms-tab-btn" data-tab="video">Gameplay Video</button>
       <button type="button" class="cms-tab-btn" data-tab="messages">Message Inbox</button>
     </div>
@@ -72,6 +73,41 @@
       <div id="content-editor-fields">Loading...</div>
       <button class="btn" id="save-content-btn" style="margin-top:18px;">Save All Content</button>
       <p class="form-msg" id="content-save-msg"></p>
+    </div>
+
+    <div class="cms-section cms-tab-panel" id="tab-customers" style="display:none;">
+      <h2>Customer Images</h2>
+      <p>Upload a picture (or paste a link) for each customer on the Customers page. Saving replaces the image that's currently showing.</p>
+      <div class="customer-image-row" data-key="customers_kapre_image">
+        <h3>Kapre</h3>
+        <img class="customer-image-preview" alt="Kapre current image" />
+        <label for="cust-kapre-file">Upload a New Image</label>
+        <input type="file" id="cust-kapre-file" accept="image/*" />
+        <label for="cust-kapre-url">Or Paste an Image Link</label>
+        <input type="text" id="cust-kapre-url" placeholder="https://..." />
+        <button type="button" class="btn cust-save-btn" data-who="kapre">Save Kapre Image</button>
+        <p class="form-msg" id="cust-kapre-msg"></p>
+      </div>
+      <div class="customer-image-row" data-key="customers_manananggal_image">
+        <h3>Manananggal</h3>
+        <img class="customer-image-preview" alt="Manananggal current image" />
+        <label for="cust-manananggal-file">Upload a New Image</label>
+        <input type="file" id="cust-manananggal-file" accept="image/*" />
+        <label for="cust-manananggal-url">Or Paste an Image Link</label>
+        <input type="text" id="cust-manananggal-url" placeholder="https://..." />
+        <button type="button" class="btn cust-save-btn" data-who="manananggal">Save Manananggal Image</button>
+        <p class="form-msg" id="cust-manananggal-msg"></p>
+      </div>
+      <div class="customer-image-row" data-key="customers_duwende_image">
+        <h3>Duwende</h3>
+        <img class="customer-image-preview" alt="Duwende current image" />
+        <label for="cust-duwende-file">Upload a New Image</label>
+        <input type="file" id="cust-duwende-file" accept="image/*" />
+        <label for="cust-duwende-url">Or Paste an Image Link</label>
+        <input type="text" id="cust-duwende-url" placeholder="https://..." />
+        <button type="button" class="btn cust-save-btn" data-who="duwende">Save Duwende Image</button>
+        <p class="form-msg" id="cust-duwende-msg"></p>
+      </div>
     </div>
 
     <div class="cms-section cms-tab-panel" id="tab-video" style="display:none;">
