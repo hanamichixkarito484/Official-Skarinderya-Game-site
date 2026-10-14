@@ -34,6 +34,7 @@
       <button type="button" class="cms-tab-btn active" data-tab="dishes">Manage Dishes</button>
       <button type="button" class="cms-tab-btn" data-tab="content">Page Content</button>
       <button type="button" class="cms-tab-btn" data-tab="customers">Customer Images</button>
+      <button type="button" class="cms-tab-btn" data-tab="team">Team Photos</button>
       <button type="button" class="cms-tab-btn" data-tab="video">Gameplay Video</button>
       <button type="button" class="cms-tab-btn" data-tab="messages">Message Inbox</button>
     </div>
@@ -73,6 +74,51 @@
       <div id="content-editor-fields">Loading...</div>
       <button class="btn" id="save-content-btn" style="margin-top:18px;">Save All Content</button>
       <p class="form-msg" id="content-save-msg"></p>
+    </div>
+
+    <div class="cms-section cms-tab-panel" id="tab-team" style="display:none;">
+      <h2>Team Photos</h2>
+      <p>Add a photo for each team member shown on the About page. Choose a file or paste a link, then save. The name shown is the card's title from Page Content.</p>
+      <div class="team-image-row" data-key="about_team1_image" data-title-key="about_team1_title">
+        <h3 class="team-row-name">Team card 1</h3>
+        <img class="customer-image-preview" alt="Team card 1 current photo" />
+        <label for="team1-file">Upload a Photo</label>
+        <input type="file" id="team1-file" accept="image/*" />
+        <label for="team1-url">Or Paste an Image Link</label>
+        <input type="text" id="team1-url" placeholder="https://..." />
+        <button type="button" class="btn team-save-btn" data-n="1">Save Photo</button>
+        <p class="form-msg" id="team1-msg"></p>
+      </div>
+      <div class="team-image-row" data-key="about_team2_image" data-title-key="about_team2_title">
+        <h3 class="team-row-name">Team card 2</h3>
+        <img class="customer-image-preview" alt="Team card 2 current photo" />
+        <label for="team2-file">Upload a Photo</label>
+        <input type="file" id="team2-file" accept="image/*" />
+        <label for="team2-url">Or Paste an Image Link</label>
+        <input type="text" id="team2-url" placeholder="https://..." />
+        <button type="button" class="btn team-save-btn" data-n="2">Save Photo</button>
+        <p class="form-msg" id="team2-msg"></p>
+      </div>
+      <div class="team-image-row" data-key="about_team3_image" data-title-key="about_team3_title">
+        <h3 class="team-row-name">Team card 3</h3>
+        <img class="customer-image-preview" alt="Team card 3 current photo" />
+        <label for="team3-file">Upload a Photo</label>
+        <input type="file" id="team3-file" accept="image/*" />
+        <label for="team3-url">Or Paste an Image Link</label>
+        <input type="text" id="team3-url" placeholder="https://..." />
+        <button type="button" class="btn team-save-btn" data-n="3">Save Photo</button>
+        <p class="form-msg" id="team3-msg"></p>
+      </div>
+      <div class="team-image-row" data-key="about_team4_image" data-title-key="about_team4_title">
+        <h3 class="team-row-name">Team card 4</h3>
+        <img class="customer-image-preview" alt="Team card 4 current photo" />
+        <label for="team4-file">Upload a Photo</label>
+        <input type="file" id="team4-file" accept="image/*" />
+        <label for="team4-url">Or Paste an Image Link</label>
+        <input type="text" id="team4-url" placeholder="https://..." />
+        <button type="button" class="btn team-save-btn" data-n="4">Save Photo</button>
+        <p class="form-msg" id="team4-msg"></p>
+      </div>
     </div>
 
     <div class="cms-section cms-tab-panel" id="tab-customers" style="display:none;">
