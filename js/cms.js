@@ -286,6 +286,75 @@ async function loadContentEditor() {
   });
 }
 
+// ---------- Team Photos (upload or link) ----------
+const TEAM_PLACEHOLDER = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23F5E4CC'/%3E%3Ccircle cx='50' cy='38' r='18' fill='%23C9A57B'/%3E%3Cellipse cx='50' cy='88' rx='32' ry='26' fill='%23C9A57B'/%3E%3C/svg%3E";
+
+async function setupTeamImages() {
+  const rows = document.querySelectorAll(".team-image-row");
+  if (!rows.length) return;
+
+  const { data } = await supabaseClient.from("content_blocks").select("key, value");
+  const saved = {};
+  (data || []).forEach((r) => (saved[r.key] = r.value));
+  const titleDefaults = { 1: "Development", 2: "Community", 3: "Culinary Advisors", 4: "Mickey Saballegue" };
+
+  rows.forEach((row, i) => {
+    const imgKey = row.getAttribute("data-key");
+    const titleKey = row.getAttribute("data-title-key");
+    row.querySelector(".team-row-name").textContent = saved[titleKey] || titleDefaults[i + 1] || `Team card ${i + 1}`;
+    row.querySelector(".customer-image-preview").src = saved[imgKey] || TEAM_PLACEHOLDER;
+  });
+
+  document.querySelectorAll(".team-save-btn").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const n = btn.getAttribute("data-n");
+      const key = `about_team${n}_image`;
+      const fileInput = document.getElementById(`team${n}-file`);
+      const urlInput = document.getElementById(`team${n}-url`);
+      const msgEl = document.getElementById(`team${n}-msg`);
+      const preview = btn.closest(".team-image-row").querySelector(".customer-image-preview");
+
+      msgEl.textContent = "Saving...";
+      msgEl.className = "form-msg";
+
+      let value = urlInput.value.trim();
+
+      // A chosen file always takes priority over a pasted link
+      if (fileInput.files && fileInput.files[0]) {
+        const file = fileInput.files[0];
+        const path = `team/${Date.now()}-${file.name.replace(/\s+/g, "-")}`;
+        const { error: uploadError } = await supabaseClient.storage.from("site-media").upload(path, file);
+        if (uploadError) {
+          msgEl.textContent = "Upload failed: " + uploadError.message;
+          msgEl.className = "form-msg error";
+          return;
+        }
+        const { data: urlData } = supabaseClient.storage.from("site-media").getPublicUrl(path);
+        value = urlData.publicUrl;
+      }
+
+      if (!value) {
+        msgEl.textContent = "Choose a file or paste an image link first.";
+        msgEl.className = "form-msg error";
+        return;
+      }
+
+      const { error } = await supabaseClient.from("content_blocks").upsert({ key, value });
+      if (error) {
+        msgEl.textContent = "Error: " + error.message;
+        msgEl.className = "form-msg error";
+        return;
+      }
+
+      msgEl.textContent = "Saved! Check the About page.";
+      msgEl.className = "form-msg success";
+      preview.src = value;
+      fileInput.value = "";
+      urlInput.value = "";
+    });
+  });
+}
+
 // ---------- Customer Images (upload or link) ----------
 async function setupCustomerImages() {
   const rows = document.querySelectorAll(".customer-image-row");
@@ -468,4 +537,5 @@ document.addEventListener("DOMContentLoaded", async () => {
   setupContentSaveButton();
   setupVideoForm();
   setupCustomerImages();
+  setupTeamImages();
 });
