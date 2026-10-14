@@ -544,3 +544,13 @@ table.cms-table th {
   display: block;
   margin: 0 auto 10px;
 }
+
+/* ---------- About page team photos ---------- */
+.card img.team-photo {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 12px;
+}
