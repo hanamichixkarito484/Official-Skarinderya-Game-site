@@ -1,10 +1,10 @@
 /* ===========================================================
    Cooking Game Website - Shared Stylesheet
    Cozy warm theme
-   Fonts: Asimovian (headings and body), Dancing Script (logo)
+   Fonts: Montserrat (headings bold, body regular), Dancing Script (logo)
    =========================================================== */
 
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Asimovian&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;500;600;700&display=swap");
 
 :root {
   --bg-warm: #FBF1E1;         /* cozy cream background */
@@ -26,9 +26,8 @@
 
 body {
   margin: 0;
-  font-synthesis: none;
   text-align: center;
-  font-family: "Asimovian", "Segoe UI", Arial, sans-serif;
+  font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
   background-color: var(--bg-warm);
   background-image: url("../images/background.jpg");
   background-size: cover;
@@ -40,7 +39,8 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: "Asimovian", "Segoe UI", Arial, sans-serif;
+  font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+  font-weight: 700;
   color: var(--accent-brown);
   margin-top: 0;
 }
@@ -187,6 +187,7 @@ img {
 }
 
 .btn {
+  font-weight: 600;
   display: inline-block;
   background-color: var(--accent-terracotta);
   color: var(--white);
